@@ -1,4 +1,5 @@
-from Commando import commando
+from Commando.plugin import ApplicationCommando, TextCommando, WindowCommando
+from Commando.core import devlog
 import os
 
 def get_vcs_type(cur_dir):
@@ -14,20 +15,33 @@ def get_vcs_type(cur_dir):
       cur_dir = os.path.abspath(os.path.join(cur_dir, '..'))
   return None
 
-class CommandoVcsStatusCommand(commando.WindowCommando):
-  def cmd(self, input, args):
-    vcs_type = get_vcs_type(self.get_working_dir())
-    if vcs_type:
-      self.commando(['commando_'+vcs_type+'_status'])
+class VcsRepoCommand(WindowCommando):
+  def is_enabled(self):
+    return get_vcs_type(self.get_working_dir()) is not None
 
-class CommandoVcsDiffFileCommand(commando.TextCommando):
-  def cmd(self, input, args):
-    vcs_type = get_vcs_type(self.get_working_dir())
-    if vcs_type:
-      self.commando(['commando_'+vcs_type+'_diff_file'])
+class VcsFileCommand(TextCommando):
+  def is_enabled(self):
+    return (
+      get_vcs_type(self.get_working_dir()) is not None
+      and self.get_view() is not None
+      and self.get_view().file_name() is not None
+    )
 
-class CommandoVcsDiffRepoCommand(commando.WindowCommando):
-  def cmd(self, input, args):
-    vcs_type = get_vcs_type(self.get_working_dir())
+
+class CommandoVcsStatusCommand(VcsRepoCommand):
+  def cmd(self, context, input, args):
+    vcs_type = get_vcs_type(self.get_working_dir(context))
     if vcs_type:
-      self.commando(['commando_'+vcs_type+'_diff_repo'])
+      self.commando(context, ['commando_'+vcs_type+'_status'])
+
+class CommandoVcsDiffFileCommand(VcsFileCommand):
+  def cmd(self, context, input, args):
+    vcs_type = get_vcs_type(self.get_working_dir(context))
+    if vcs_type:
+      self.commando(context, ['commando_'+vcs_type+'_status'])
+
+class CommandoVcsDiffRepoCommand(VcsRepoCommand):
+  def cmd(self, context, input, args):
+    vcs_type = get_vcs_type(self.get_working_dir(context))
+    if vcs_type:
+      self.commando(context, ['commando_'+vcs_type+'_status'])

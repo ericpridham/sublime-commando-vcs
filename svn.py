@@ -1,42 +1,43 @@
-from Commando import commando
+from Commando.plugin import ApplicationCommando, TextCommando, WindowCommando
+from Commando.core import devlog
 import re
 import os
 
-class CommandoSvnStatusCommand(commando.WindowCommando):
-  def cmd(self, input, args):
-    self.commando([
+class CommandoSvnStatusCommand(WindowCommando):
+  def cmd(self, context, input, args):
+    self.commando(context, [
       ['commando_exec', {'cmd': ['svn', 'status']}],
       'commando_svn_parse_status',
       'commando_quick_panel',
       'commando_svn_status_selected'
     ])
 
-class CommandoSvnDiffFileCommand(commando.TextCommando):
-  def cmd(self, input, args):
-    self.commando([
+class CommandoSvnDiffFileCommand(TextCommando):
+  def cmd(self, context, input, args):
+    self.commando(context, [
       ['commando_exec', {'cmd': ['svn', 'diff', '$file']}],
-      ['commando_new_file', {'syntax': 'Diff', 'ro': True, 'scratch': True, 'name': 'SVN_DIFF_FILE'}]
+      ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'SVN_DIFF_FILE'}]
     ])
 
-class CommandoSvnDiffRepoCommand(commando.TextCommando):
-  def cmd(self, input, args):
-    self.commando([
+class CommandoSvnDiffRepoCommand(WindowCommando):
+  def cmd(self, context, input, args):
+    self.commando(context, [
       ['commando_exec', {'cmd': ['svn', 'diff']}],
-      ['commando_new_file', {'syntax': 'Diff', 'ro': True, 'scratch': True, 'name': 'SVN_DIFF_REPO'}]
+      ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'SVN_DIFF_REPO'}]
     ])
 
 #
 # Helpers
 #
 
-class CommandoSvnParseStatus(commando.ApplicationCommando):
-  def cmd(self, input, args):
+class CommandoSvnParseStatus(ApplicationCommando):
+  def cmd(self, context, input, args):
     if not input:
       return False
-    return input.strip().splitlines()
+    return input.splitlines()
 
-class CommandoSvnStatusSelected(commando.ApplicationCommando):
-  def cmd(self, input, args):
-    tokens = re.split('\s+', input)
+class CommandoSvnStatusSelected(ApplicationCommando):
+  def cmd(self, context, input, args):
+    tokens = re.split('\s+', input.strip())
     if tokens and tokens[1] and os.path.exists(self.get_path(tokens[1])):
       self.open_file(self.get_path(tokens[1]))
