@@ -38,10 +38,10 @@ class CommandoVcsDiffFileCommand(VcsFileCommand):
   def cmd(self, context, input, args):
     vcs_type = get_vcs_type(self.get_working_dir(context))
     if vcs_type:
-      self.commando(context, ['commando_'+vcs_type+'_status'])
+      self.commando(context, ['commando_'+vcs_type+'_diff_file'])
 
 class CommandoVcsDiffRepoCommand(VcsRepoCommand):
   def cmd(self, context, input, args):
     vcs_type = get_vcs_type(self.get_working_dir(context))
     if vcs_type:
-      self.commando(context, ['commando_'+vcs_type+'_status'])
+      self.commando(context, ['commando_'+vcs_type+'_diff_repo'])

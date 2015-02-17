@@ -21,6 +21,7 @@ class CommandoGitDiffFileCommand(TextCommando):
 
 class CommandoGitDiffRepoCommand(WindowCommando):
   def cmd(self, context, input, args):
+    devlog(context)
     self.commando(context, [
       ['commando_exec', {'cmd': ['git', 'diff']}],
       ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'GIT_DIFF_REPO'}]

@@ -34,10 +34,10 @@ class CommandoSvnParseStatus(ApplicationCommando):
   def cmd(self, context, input, args):
     if not input:
       return False
-    return input.splitlines()
+    context['input'] = input.splitlines()
 
 class CommandoSvnStatusSelected(ApplicationCommando):
   def cmd(self, context, input, args):
     tokens = re.split('\s+', input.strip())
-    if tokens and tokens[1] and os.path.exists(self.get_path(tokens[1])):
-      self.open_file(self.get_path(tokens[1]))
+    if tokens and tokens[1] and os.path.exists(self.get_path(context, tokens[1])):
+      self.open_file(context, self.get_path(context, tokens[1]))
