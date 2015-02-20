@@ -26,6 +26,20 @@ class CommandoGitDiffRepoCommand(CommandoRun):
       ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'GIT_DIFF_REPO'}]
     ]
 
+class CommandoGitCheckoutFileCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_ok_cancel_dialog', {'msg': 'Are you sure?\n\nThis will wipe out all local changes and cannot be undone.'}],
+      ['commando_exec', {'cmd': ['git', 'checkout', '$file']}]
+    ]
+
+class CommandoGitLogFileCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'log', '$file']}],
+      ['commando_new_file', {'readonly': True, 'scratch': True, 'name': 'GIT_LOG_FILE'}]
+    ]
+
 #
 # Helpers
 #

@@ -21,10 +21,24 @@ class CommandoSvnDiffFileCommand(CommandoRun):
 
 class CommandoSvnDiffRepoCommand(CommandoRun):
   def commands(self):
-    self.commando(context, [
+    return [
       ['commando_exec', {'cmd': ['svn', 'diff']}],
       ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'SVN_DIFF_REPO'}]
-    ])
+    ]
+
+class CommandoSvnRevertFileCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_ok_cancel_dialog', {'msg': 'Are you sure?\n\nThis will wipe out all local changes and cannot be undone.'}],
+      ['commando_exec', {'cmd': ['svn', 'revert', '$file']}]
+    ]
+
+class CommandoSvnLogFileCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['svn', 'log', '$file']}],
+      ['commando_new_file', {'readonly': True, 'scratch': True, 'name': 'SVN_LOG_FILE'}]
+    ]
 
 #
 # Helpers

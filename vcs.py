@@ -1,4 +1,5 @@
 from Commando.plugin import CommandoRun, CommandoCmd
+from Commando import core as commando_core
 import os
 
 def get_vcs_type(cur_dir):
@@ -14,45 +15,66 @@ def get_vcs_type(cur_dir):
       cur_dir = os.path.abspath(os.path.join(cur_dir, '..'))
   return None
 
+def get_redirect(command_obj):
+  vcs_type = command_obj.get_type()
+  if vcs_type is None:
+    return []
+  return
+
 #
 # Base
 #
 class VcsCommando(CommandoRun):
-  def get_type(self):
-    return get_vcs_type(self.get_path())
+  def get_type(self, context=None):
+    return get_vcs_type(self.get_path(context))
+
+  def commands(self):
+    """Magic!  Forward commando_vcs_* to commando_[type]_*."""
+    vcs_type = self.get_type()
+    if vcs_type is None:
+      return []
+    cmd = commando_core.class_to_command(type(self))
+    if not cmd:
+      return []
+    # just being extra safe here
+    cmd = cmd.replace('commando_vcs', 'commando_'+vcs_type)
+    return [cmd]
 
 class VcsRepoCommando(VcsCommando):
-  def is_enabled(self):
-    return self.get_type() is not None
+  def is_enabled(self, context=None):
+    return self.get_type(context=context) is not None
 
 class VcsFileCommando(VcsCommando):
-  def is_enabled(self):
+  def is_enabled(self, context=None):
     return (
-      self.get_type() is not None
-      and self.get_view() is not None
-      and self.get_view().file_name() is not None
+      self.get_type(context=context) is not None
+      and self.get_view(context=context) is not None
+      and self.get_view(context=context).file_name() is not None
     )
 
 #
-# Commands
+# Thinky commands
+#
+class CommandoVcsRevertFileCommand(VcsRepoCommando):
+  def commands(self):
+    vcs_type = self.get_type()
+    if vcs_type == 'git':
+      return ['commando_git_checkout_file']
+    elif vcs_type == 'svn':
+      return ['commando_svn_revert_file']
+    return []
+
+#
+# Forwarding Commands
 #
 class CommandoVcsStatusCommand(VcsRepoCommando):
-  def commands(self):
-    vcs_type = self.get_type()
-    if vcs_type is None:
-      return []
-    return ['commando_'+vcs_type+'_status']
+  pass
 
 class CommandoVcsDiffRepoCommand(VcsRepoCommando):
-  def commands(self):
-    vcs_type = self.get_type()
-    if vcs_type is None:
-      return []
-    return ['commando_'+vcs_type+'_diff_repo']
+  pass
 
 class CommandoVcsDiffFileCommand(VcsFileCommando):
-  def commands(self):
-    vcs_type = self.get_type()
-    if vcs_type is None:
-      return []
-    return ['commando_'+vcs_type+'_diff_file']
+  pass
+
+class CommandoVcsLogFileCommand(VcsFileCommando):
+  pass
