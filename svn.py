@@ -37,7 +37,7 @@ class CommandoSvnLogFileCommand(CommandoRun):
   def commands(self):
     return [
       ['commando_exec', {'cmd': ['svn', 'log', '$file']}],
-      ['commando_new_file', {'readonly': True, 'scratch': True, 'name': 'SVN_LOG_FILE'}]
+      ['commando_new_file', {'syntax': 'Git Log', 'readonly': True, 'scratch': True, 'name': 'SVN_LOG_FILE'}]
     ]
 
 #

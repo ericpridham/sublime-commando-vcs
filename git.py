@@ -26,6 +26,13 @@ class CommandoGitDiffRepoCommand(CommandoRun):
       ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'GIT_DIFF_REPO'}]
     ]
 
+class CommandoGitLogRepoCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'log']}],
+      ['commando_new_file', {'syntax': 'Packages/CommandoVCS/GitLog.tmLanguage', 'readonly': True, 'scratch': True, 'name': 'GIT_LOG_REPO'}]
+    ]
+
 class CommandoGitCheckoutFileCommand(CommandoRun):
   def commands(self):
     return [
@@ -37,7 +44,50 @@ class CommandoGitLogFileCommand(CommandoRun):
   def commands(self):
     return [
       ['commando_exec', {'cmd': ['git', 'log', '$file']}],
-      ['commando_new_file', {'readonly': True, 'scratch': True, 'name': 'GIT_LOG_FILE'}]
+      ['commando_new_file', {'syntax': 'Packages/CommandoVCS/GitLog.tmLanguage', 'readonly': True, 'scratch': True, 'name': 'GIT_LOG_FILE'}]
+    ]
+
+class CommandoGitAddFileCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'add', '$file']}]
+    ]
+
+class CommandoGitResetFileCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'reset', '$file']}]
+    ]
+
+class CommandoGitCommitCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'diff', '--cached']}],
+      ['commando_switch', {
+        '': [['commando_show_panel', {'input': 'No changes.'}]],
+        'default': [
+          ['commando_exec', {'cmd': ['git', 'status']}],
+          'commando_git_prep_commit_prompt',
+          ['commando_new_file', {'scratch': True, 'name': 'GIT_COMMIT'}],
+          'commando_git_prep_commit_message',
+          ['commando_exec', {'cmd': ['git', 'commit', '-m', '$input']}],
+          'commando_show_panel'
+        ]
+      }]
+    ]
+
+class CommandoGitPushCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'push']}],
+      'commando_show_panel'
+    ]
+
+class CommandoGitPullCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'pull']}],
+      'commando_show_panel'
     ]
 
 #
@@ -55,3 +105,11 @@ class CommandoGitStatusSelected(CommandoCmd):
     tokens = re.split('\s+', input.strip())
     if tokens and tokens[1] and os.path.exists(self.get_path(context, tokens[1])):
       commando_core.open_file(context, self.get_path(context, tokens[1]))
+
+class CommandoGitPrepCommitPrompt(CommandoCmd):
+  def cmd(self, context, input, args):
+    context['input'] = "\n" + "\n".join(map(lambda l: "# "+l if not l or l[0] != "#" else l, input.strip().split("\n")))
+
+class CommandoGitPrepCommitMessage(CommandoCmd):
+  def cmd(self, context, input, args):
+    context['input'] = "\n".join(map(lambda l: l if not l or l[0] != "#" else "", input.strip().split("\n"))).strip()

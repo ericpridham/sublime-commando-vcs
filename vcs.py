@@ -64,6 +64,16 @@ class CommandoVcsRevertFileCommand(VcsRepoCommando):
       return ['commando_svn_revert_file']
     return []
 
+class CommandoVcsUpdateCommand(VcsRepoCommando):
+  def commands(self):
+    vcs_type = self.get_type()
+    if vcs_type == 'git':
+      return ['commando_git_pull']
+    elif vcs_type == 'svn':
+      return ['commando_svn_update']
+    return []
+
+
 #
 # Forwarding Commands
 #
@@ -73,8 +83,14 @@ class CommandoVcsStatusCommand(VcsRepoCommando):
 class CommandoVcsDiffRepoCommand(VcsRepoCommando):
   pass
 
+class CommandoVcsLogRepoCommand(VcsRepoCommando):
+  pass
+
 class CommandoVcsDiffFileCommand(VcsFileCommando):
   pass
 
 class CommandoVcsLogFileCommand(VcsFileCommando):
+  pass
+
+class CommandoVcsCommitCommand(VcsRepoCommando):
   pass
