@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>Git Log</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.gitlog.commit</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.gitlog.hash</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Commit hash line.</string>
+			<key>match</key>
+			<string>^(commit) +([0-9a-z]+)$</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.gitlog.merge</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.gitlog.commit</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.gitlog.commit</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Merge line.</string>
+			<key>match</key>
+			<string>^(Merge:) +([0-9a-z]+) ?([0-9a-z]+)? ?([0-9a-z]+)? ?([0-9a-z]+)?$</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.gitlog.author</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.gitlog.author</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Author line.</string>
+			<key>match</key>
+			<string>^(Author:) +(.+)$</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.gitlog.date</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.gitlog.date</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Date line.</string>
+			<key>match</key>
+			<string>^(Date:) +(.+)$</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.git_log</string>
+	<key>uuid</key>
+	<string>93994a48-2624-44ac-83dd-898a73d155d9</string>
+</dict>
+</plist>
