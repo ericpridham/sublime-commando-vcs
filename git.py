@@ -108,8 +108,13 @@ class CommandoGitStatusSelected(CommandoCmd):
 
 class CommandoGitPrepCommitPrompt(CommandoCmd):
   def cmd(self, context, input, args):
-    context['input'] = "\n" + "\n".join(map(lambda l: "# "+l if not l or l[0] != "#" else l, input.strip().split("\n")))
+    context['input'] = "\n" \
+      + "# Enter a commit message above.  Any lines beginning with # are ignored.  A blank message will abort the commit.\n" \
+      + "#\n" \
+      + "\n".join(map(lambda l: "# "+l if not l or l[0] != "#" else l, input.strip().split("\n")))
 
 class CommandoGitPrepCommitMessage(CommandoCmd):
   def cmd(self, context, input, args):
     context['input'] = "\n".join(map(lambda l: l if not l or l[0] != "#" else "", input.strip().split("\n"))).strip()
+    if not context['input']:
+      return False

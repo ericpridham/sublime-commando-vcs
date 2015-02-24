@@ -40,6 +40,23 @@ class CommandoSvnLogFileCommand(CommandoRun):
       ['commando_new_file', {'syntax': 'Git Log', 'readonly': True, 'scratch': True, 'name': 'SVN_LOG_FILE'}]
     ]
 
+class CommandoSvnCommitCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['svn', 'status']}],
+      ['commando_switch', {
+        '': [['commando_show_panel', {'input': 'No changes.'}]],
+        'default': [
+          ['commando_exec', {'cmd': ['svn', 'status']}],
+          'commando_svn_prep_commit_prompt',
+          ['commando_new_file', {'scratch': True, 'name': 'SVN_COMMIT'}],
+          'commando_svn_prep_commit_message',
+          ['commando_exec', {'cmd': ['svn', 'commit', '-m', '$input']}],
+          'commando_show_panel'
+        ]
+      }]
+    ]
+
 #
 # Helpers
 #
@@ -55,3 +72,16 @@ class CommandoSvnStatusSelected(CommandoCmd):
     tokens = re.split('\s+', input.strip())
     if tokens and tokens[1] and os.path.exists(self.get_path(context, tokens[1])):
       commando_core.open_file(context, self.get_path(context, tokens[1]))
+
+class CommandoSvnPrepCommitPrompt(CommandoCmd):
+  def cmd(self, context, input, args):
+    context['input'] = "\n" \
+      + "# Enter a commit message above.  Any lines beginning with # are ignored.  A blank message will abort the commit.\n" \
+      + "#\n" \
+      + "\n".join(map(lambda l: "# "+l if not l or l[0] != "#" else l, input.strip().split("\n")))
+
+class CommandoSvnPrepCommitMessage(CommandoCmd):
+  def cmd(self, context, input, args):
+    context['input'] = "\n".join(map(lambda l: l if not l or l[0] != "#" else "", input.strip().split("\n"))).strip()
+    if not context['input']:
+      return False
