@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>Git Blame</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.hash.git-blame</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>string.author.git-blame</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>string.date.git-blame</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>variable.linenumber.git-blame</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>text.line.code.git-blame</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Blame line.</string>
+			<key>match</key>
+			<string>^([0-9a-z]+) +\((.*) +(\d{4}-\d{2}-\d{2}) +(\d+)\)(.*)$</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.git-blame</string>
+	<key>uuid</key>
+	<string>93994a48-2624-44ac-83dd-898a73d155d9</string>
+</dict>
+</plist>

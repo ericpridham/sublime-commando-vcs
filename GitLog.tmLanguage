@@ -14,12 +14,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.gitlog.commit</string>
+					<string>keyword.git-log.commit</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>constant.gitlog.hash</string>
+					<string>constant.git-log.hash</string>
 				</dict>
 			</dict>
 			<key>comment</key>
@@ -33,17 +33,17 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.gitlog.merge</string>
+					<string>keyword.merge.git-log</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>constant.gitlog.commit</string>
+					<string>constant.commit.git-log</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>constant.gitlog.commit</string>
+					<string>constant.commit.git-log</string>
 				</dict>
 			</dict>
 			<key>comment</key>
@@ -57,12 +57,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.gitlog.author</string>
+					<string>keyword.author.git-log</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>constant.gitlog.author</string>
+					<string>string.author.git-log</string>
 				</dict>
 			</dict>
 			<key>comment</key>
@@ -76,12 +76,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.gitlog.date</string>
+					<string>keyword.date.git-log</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>constant.gitlog.date</string>
+					<string>string.date.git-log</string>
 				</dict>
 			</dict>
 			<key>comment</key>
@@ -91,7 +91,7 @@
 		</dict>
 	</array>
 	<key>scopeName</key>
-	<string>text.git_log</string>
+	<string>text.git-log</string>
 	<key>uuid</key>
 	<string>93994a48-2624-44ac-83dd-898a73d155d9</string>
 </dict>

@@ -1,0 +1,30 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Git Log
+scopeName: text.git-log
+fileTypes: []
+uuid: 93994a48-2624-44ac-83dd-898a73d155d9
+
+patterns:
+- comment: Commit hash line.
+  match: ^(commit) +([0-9a-z]+)$
+  captures:
+    '1': {name: keyword.git-log.commit}
+    '2': {name: constant.git-log.hash}
+- comment: Merge line.
+  match: ^(Merge:) +([0-9a-z]+) ?([0-9a-z]+)? ?([0-9a-z]+)? ?([0-9a-z]+)?$
+  captures:
+    '1': {name: keyword.merge.git-log}
+    '2': {name: constant.commit.git-log}
+    '3': {name: constant.commit.git-log}
+- comment: Author line.
+  match: ^(Author:) +(.+)$
+  captures:
+    '1': {name: keyword.author.git-log}
+    '2': {name: string.author.git-log}
+- comment: Date line.
+  match: ^(Date:) +(.+)$
+  captures:
+    '1': {name: keyword.date.git-log}
+    '2': {name: string.date.git-log}
+...

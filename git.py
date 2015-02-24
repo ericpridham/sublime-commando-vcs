@@ -90,6 +90,13 @@ class CommandoGitPullCommand(CommandoRun):
       'commando_show_panel'
     ]
 
+class CommandoGitBlameCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['git', 'blame', '--date=short', '-w', '$file']}],
+      ['commando_new_file', {'syntax': 'Packages/CommandoVCS/GitBlame.tmLanguage', 'readonly': True, 'scratch': True, 'name': 'GIT_BLAME_FILE'}]
+    ]
+
 #
 # Helpers
 #

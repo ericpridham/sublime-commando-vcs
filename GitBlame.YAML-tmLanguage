@@ -1,0 +1,17 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Git Blame
+scopeName: text.git-blame
+fileTypes: []
+uuid: 93994a48-2624-44ac-83dd-898a73d155d9
+
+patterns:
+- comment: Blame line.
+  match: ^([0-9a-z]+) +\((.*) +(\d{4}-\d{2}-\d{2}) +(\d+)\)(.*)$
+  captures:
+    '1': {name: constant.hash.git-blame}
+    '2': {name: string.author.git-blame}
+    '3': {name: string.date.git-blame}
+    '4': {name: variable.linenumber.git-blame}
+    '5': {name: text.line.code.git-blame}
+...

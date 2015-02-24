@@ -86,11 +86,14 @@ class CommandoVcsDiffRepoCommand(VcsRepoCommando):
 class CommandoVcsLogRepoCommand(VcsRepoCommando):
   pass
 
+class CommandoVcsCommitCommand(VcsRepoCommando):
+  pass
+
 class CommandoVcsDiffFileCommand(VcsFileCommando):
   pass
 
 class CommandoVcsLogFileCommand(VcsFileCommando):
   pass
 
-class CommandoVcsCommitCommand(VcsRepoCommando):
+class CommandoVcsBlameCommand(VcsFileCommando):
   pass
