@@ -26,6 +26,14 @@ class CommandoSvnDiffRepoCommand(CommandoRun):
       ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'SVN_DIFF_REPO'}]
     ]
 
+class CommandoSvnDiffRevisionCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_input_panel', {'caption': 'Revision'}],
+      ['commando_exec', {'cmd': ['svn', 'diff', '-c', '$input']}],
+      ['commando_new_file', {'syntax': 'Diff', 'readonly': True, 'scratch': True, 'name': 'SVN_DIFF_REV'}]
+    ]
+
 class CommandoSvnRevertFileCommand(CommandoRun):
   def commands(self):
     return [
@@ -37,7 +45,7 @@ class CommandoSvnLogFileCommand(CommandoRun):
   def commands(self):
     return [
       ['commando_exec', {'cmd': ['svn', 'log', '$file']}],
-      ['commando_new_file', {'syntax': 'Git Log', 'readonly': True, 'scratch': True, 'name': 'SVN_LOG_FILE'}]
+      ['commando_new_file', {'syntax': 'Packages/CommandoVCS/SvnLog.tmLanguage', 'readonly': True, 'scratch': True, 'name': 'SVN_LOG_FILE'}]
     ]
 
 class CommandoSvnCommitCommand(CommandoRun):
@@ -57,6 +65,13 @@ class CommandoSvnCommitCommand(CommandoRun):
       }]
     ]
 
+class CommandoSvnBlameCommand(CommandoRun):
+  def commands(self):
+    return [
+      ['commando_exec', {'cmd': ['svn', 'blame', '$file']}],
+      ['commando_new_file', {'syntax': 'Packages/CommandoVCS/SvnBlame.tmLanguage', 'readonly': True, 'scratch': True, 'name': 'SVN_BLAME_FILE'}]
+    ]
+
 #
 # Helpers
 #
@@ -64,8 +79,11 @@ class CommandoSvnCommitCommand(CommandoRun):
 class CommandoSvnParseStatus(CommandoCmd):
   def cmd(self, context, input, args):
     if not input:
-      return False
-    context['input'] = input.splitlines()
+      context['commands'] = [
+        ["commando_show_panel", {"input": "No changes."}]
+      ]
+    else:
+      context['input'] = input.splitlines()
 
 class CommandoSvnStatusSelected(CommandoCmd):
   def cmd(self, context, input, args):

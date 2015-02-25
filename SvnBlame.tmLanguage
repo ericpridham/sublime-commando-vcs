@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>Svn Blame</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.revision.svn-blame</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>string.author.svn-blame</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>text.line.code.svn-blame</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Blame line.</string>
+			<key>match</key>
+			<string>^ *([\d-]+) +([^ ]+) (.*)$</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.svn-blame</string>
+	<key>uuid</key>
+	<string>93994a48-2624-44ac-83dd-898a73d155d9</string>
+</dict>
+</plist>

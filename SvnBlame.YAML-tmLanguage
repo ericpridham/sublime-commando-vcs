@@ -1,0 +1,15 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Svn Blame
+scopeName: text.svn-blame
+fileTypes: []
+uuid: 93994a48-2624-44ac-83dd-898a73d155d9
+
+patterns:
+- comment: Blame line.
+  match: ^ *([\d-]+) +([^ ]+) (.*)$
+  captures:
+    '1': {name: constant.revision.svn-blame}
+    '2': {name: string.author.svn-blame}
+    '3': {name: text.line.code.svn-blame}
+...

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>Svn Log</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>Separator</string>
+			<key>match</key>
+			<string>^-+$</string>
+			<key>name</key>
+			<string>comment.separator.svn-log</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.revision.svn-log</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>string.author.svn-log</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>string.datetime.svn-log</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.changes.svn-log</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Commit details line.</string>
+			<key>match</key>
+			<string>^(r\d+) \| ([^\|]+) \| ([^\|]+) \| (.+)$</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.svn-log</string>
+	<key>uuid</key>
+	<string>e56fa908-4b3c-4d09-ac26-921d2bd8e954</string>
+</dict>
+</plist>

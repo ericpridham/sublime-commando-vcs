@@ -1,0 +1,19 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Svn Log
+scopeName: text.svn-log
+fileTypes: []
+uuid: e56fa908-4b3c-4d09-ac26-921d2bd8e954
+
+patterns:
+- comment: Separator
+  match: ^-+$
+  name: comment.separator.svn-log
+- comment: Commit details line.
+  match: ^(r\d+) \| ([^\|]+) \| ([^\|]+) \| (.+)$
+  captures:
+    '1': {name: constant.revision.svn-log}
+    '2': {name: string.author.svn-log}
+    '3': {name: string.datetime.svn-log}
+    '4': {name: keyword.changes.svn-log}
+...
