@@ -47,9 +47,9 @@ class VcsRepoCommando(VcsCommando):
 class VcsFileCommando(VcsCommando):
   def is_enabled(self, context=None):
     return (
-      self.get_type(context=context) is not None
-      and self.get_view(context=context) is not None
+      self.get_view(context=context) is not None
       and self.get_view(context=context).file_name() is not None
+      and self.get_type(context=context) is not None
     )
 
 #

@@ -1,0 +1,19 @@
+[
+  // vcs file
+   { "caption": "VCS: Revert File",    "command": "commando_vcs_revert_file" }
+  ,{ "caption": "VCS: Log File",       "command": "commando_vcs_log_file" }
+  ,{ "caption": "VCS: Diff File",      "command": "commando_vcs_diff_file" }
+  ,{ "caption": "VCS: Blame",          "command": "commando_vcs_blame" }
+
+  ,{ "caption": "VCS: Status",         "command": "commando_vcs_status" }
+  ,{ "caption": "VCS: Log Repo",       "command": "commando_vcs_log_repo" }
+  ,{ "caption": "VCS: Diff Repo",      "command": "commando_vcs_diff_repo" }
+  ,{ "caption": "VCS: Commit",         "command": "commando_vcs_commit" }
+  ,{ "caption": "VCS: Update",         "command": "commando_vcs_update" }
+
+  // git
+  ,{ "caption": "VCS Git: Add File",   "command": "commando_git_add_file" }
+  ,{ "caption": "VCS Git: Reset File", "command": "commando_git_reset_file" }
+  ,{ "caption": "VCS Git: Branches",   "command": "commando_git_branches" }
+  ,{ "caption": "VCS Git: Push",       "command": "commando_git_push" }
+]

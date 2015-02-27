@@ -1,7 +1,20 @@
 from Commando.plugin import CommandoRun, CommandoCmd
+from .vcs import VcsRepoCommando, VcsFileCommando
 from Commando import core as commando_core
 import re
 import os
+
+class GitRepoCommando(VcsRepoCommando):
+  def is_enabled(self, context=None):
+    return self.get_type(context=context) == 'git'
+
+class GitRepoCommando(VcsFileCommando):
+  def is_enabled(self, context=None):
+    return (
+      self.get_view(context=context) is not None
+      and self.get_view(context=context).file_name() is not None
+      and self.get_type(context=context) == 'git'
+    )
 
 class CommandoGitStatusCommand(CommandoRun):
   def commands(self):
@@ -98,14 +111,18 @@ class CommandoGitBlameCommand(CommandoRun):
     ]
 
 #
+
 # Helpers
 #
 
 class CommandoGitParseStatus(CommandoCmd):
   def cmd(self, context, input, args):
     if not input:
-      return False
-    context['input'] = input.splitlines()
+      context['commands'] = [
+        ["commando_show_panel", {"input": "No changes."}]
+      ]
+    else:
+      context['input'] = input.splitlines()
 
 class CommandoGitStatusSelected(CommandoCmd):
   def cmd(self, context, input, args):

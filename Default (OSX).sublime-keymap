@@ -1,0 +1,25 @@
+[
+  { "keys": ["super+ctrl+shift+k"], "command": "commando_kill"},
+
+  // vcs - file
+  { "keys": ["ctrl+shift+r"], "command": "commando_vcs_revert_file" },
+  { "keys": ["ctrl+shift+l"], "command": "commando_vcs_log_file" },
+  { "keys": ["ctrl+shift+d"], "command": "commando_vcs_diff_file" },
+  { "keys": ["ctrl+shift+b"], "command": "commando_vcs_blame" },
+
+  // vcs - repo
+  { "keys": ["super+ctrl+shift+s"], "command": "commando_vcs_status" },
+  { "keys": ["super+ctrl+shift+l"], "command": "commando_vcs_log_repo" },
+  { "keys": ["super+ctrl+shift+d"], "command": "commando_vcs_diff_repo" },
+  { "keys": ["super+ctrl+shift+c"], "command": "commando_vcs_commit" },
+  { "keys": ["super+ctrl+shift+i"], "command": "commando_vcs_update" },
+
+  // git specific
+  { "keys": ["ctrl+shift+a"], "command": "commando_git_add_file" },
+  { "keys": ["ctrl+shift+z"], "command": "commando_git_reset_file" },
+  { "keys": ["super+ctrl+shift+b"], "command": "commando_git_branches" },
+  { "keys": ["super+ctrl+shift+o"], "command": "commando_git_push" },
+
+  // misc
+  { "keys": ["alt+o"], "context": [{"key": "selector", "operand": "constant.gitlog.hash"}], "command": "commando", "args": {"commands": [["commando_show_panel", {"input": "FOOOO"}]]}},
+]
