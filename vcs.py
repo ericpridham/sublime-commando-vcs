@@ -4,7 +4,7 @@ import os
 
 def get_vcs_type(cur_dir):
   end = False
-  while not end:
+  while cur_dir and not end:
     if os.path.exists(cur_dir+'/.git'):
       return 'git'
     if os.path.exists(cur_dir+'/.svn'):

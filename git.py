@@ -81,10 +81,15 @@ class CommandoGitCommitCommand(CommandoRun):
         'default': [
           ['commando_exec', {'cmd': ['git', 'status']}],
           'commando_git_prep_commit_prompt',
-          ['commando_new_file', {'scratch': True, 'name': 'GIT_COMMIT'}],
-          'commando_git_prep_commit_message',
-          ['commando_exec', {'cmd': ['git', 'commit', '-m', '$input']}],
-          'commando_show_panel'
+          ['commando_new_file', {
+            'scratch': True,
+            'name': 'GIT_COMMIT',
+            'on_close': [
+              'commando_git_prep_commit_message',
+              ['commando_exec', {'cmd': ['git', 'commit', '-m', '$input']}],
+              'commando_show_panel'
+            ]
+          }],
         ]
       }]
     ]

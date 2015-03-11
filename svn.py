@@ -57,10 +57,15 @@ class CommandoSvnCommitCommand(CommandoRun):
         'default': [
           ['commando_exec', {'cmd': ['svn', 'status']}],
           'commando_svn_prep_commit_prompt',
-          ['commando_new_file', {'scratch': True, 'name': 'SVN_COMMIT'}],
-          'commando_svn_prep_commit_message',
-          ['commando_exec', {'cmd': ['svn', 'commit', '-m', '$input']}],
-          'commando_show_panel'
+          ['commando_new_file', {
+            'scratch': True,
+            'name': 'SVN_COMMIT',
+            'on_close': [
+              'commando_svn_prep_commit_message',
+              ['commando_exec', {'cmd': ['svn', 'commit', '-m', '$input']}],
+              'commando_show_panel'
+            ]
+          }],
         ]
       }]
     ]
